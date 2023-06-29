@@ -1,16 +1,16 @@
 {
     "imo_keys":
     {
-        "CLIENT_ID": "rYnl80HTMBTqLX5Hx3Gmn8xN7BQ5ul3t", 
-        "SECRET": "BKqiKDXZiLm9fTGDvEenfy8q0PZmFynz3QpUwL3f1XgJDDCY-CPljzoeYbP0Zffc"
+        "CLIENT_ID": "", 
+        "SECRET": ""
     },
     "snowflake_connection":
     {
-        "USER": "shahzadm",
-        "PWD": "Gulshan81",
-        "ACCOUNT": "VXTSERL-BY91752",
-        "DATABASE": "TESTSNOWFLAKE",
-        "SCHEMA": "TEST_SCHEMA"
+        "USER": "",
+        "PWD": "",
+        "ACCOUNT": "",
+        "DATABASE": "",
+        "SCHEMA": ""
     }
     
      
