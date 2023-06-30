@@ -14,9 +14,24 @@ snowflake-sqlalchemy
 
 
 # Highlevel flow of this connector
-![High Level Flow](./imo-snowflake-connector.drawio.png)
+![High Level Flow](resources/imo-snowflake-connector.drawio.png)
 
+# Create Snowflake Resources
+  * create TESTSNOWFLAKE database with default settings
+  * create TEST_SCHEMA schema with default settings
+  * create PATIENT_TERMS table with default settings
+  ```SQL 
+  create table PATIENT_TERMS (
+    patient_id varchar(255),
+    visit_date varchar(255),
+    condition varchar(255)
+  )
+  ```
+  * upload patient_conditons.csv to the new table
 
+  ![Add Data](resources/add_data.png)
+
+# Using the connector
 - Step 1. Extraction of data from Snowflake Datawarehouse
   - Add M2M credentials in the config.json for Normalize API (ClientID and SecretKey)
   - Add Snowflake connection string details (USER, PWD, ACCOUNT, DATABASE AND SCHEMA)

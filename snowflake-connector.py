@@ -59,7 +59,7 @@ def normalize(term):
 
     # Send Normalize Request
     params = {'term': term, 'includeIMO': 'false', 'threshold': '0.5'}
-    response = requests.get(BASE_URL, params=params, headers=auth_token_header  )
+    response = requests.get(BASE_URL, params=params, headers=auth_token_header)
     json_data = json.loads(response.text)
     if 'data' in json_data and len(json_data['data']) > 0:
         if 'icd10cm' in json_data['data'][0] and len(json_data['data'][0]['icd10cm']) > 0:
@@ -117,10 +117,9 @@ df2.columns = df2.columns.str.upper()
 term_column_name = input("Type the term description column? Choose from the following\n1. {column1} \n2. {column2} \n3. {column3}\n4. None\n".format(
     column1=df.columns[0],
     column2=df.columns[1],
-    column3=df.columns[2]  
+    column3=df.columns[2]
 ))
 term_column_name = term_column_name.upper()
-
 # Normalize the dataset
 df2.insert(3, "NORMALIZED_ICD10CM", "")
 df2["NORMALIZED_ICD10CM"] = df2.apply(lambda row: normalize(row[term_column_name]),axis=1)
