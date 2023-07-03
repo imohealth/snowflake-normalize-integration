@@ -1,3 +1,6 @@
+pandas
+requests
+sqlalchemy
 snowflake-connector-python
 snowflake-connector-python[pandas]
 snowflake-sqlalchemy
