@@ -1,7 +1,7 @@
 {
     "imo_keys":
     {
-        "CLIENT_ID": "", 
+        "CLIENT_ID": "",
         "SECRET": ""
     },
     "snowflake_connection":
@@ -10,8 +10,9 @@
         "PWD": "",
         "ACCOUNT": "",
         "DATABASE": "",
-        "SCHEMA": ""
-    }
-    
-     
+        "SCHEMA": "",
+        "TABLE": ""
+    },
+    "write_method": "internal",
+    "batch_size": 20
 }

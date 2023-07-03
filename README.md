@@ -1,6 +1,6 @@
 ## SNOWFLAKE NORMALIZE CONNECTOR
 
-This is a sample app that demostrates how you can normalize patient problem conditions to industry standard icd10cm codes. 
+This is a sample app that demonstrates how you can normalize patient problem conditions to industry standard icd10cm codes. 
 
 # Requirements
 Install dependent packages with the following command
@@ -35,13 +35,14 @@ snowflake-sqlalchemy
 - Step 1. Extraction of data from Snowflake Datawarehouse
   - Add M2M credentials in the config.json for Normalize API (ClientID and SecretKey)
   - Add Snowflake connection string details (USER, PWD, ACCOUNT, DATABASE AND SCHEMA)
+  - Specify the write method for the script
+    * Use direct to write normalization data directly to the Snowflake table
+    * Use internal to write to an internal stage on the Snowflake table
+  - Specify batch size (API max is 20 in a single request)
 - Step 2  Send request to Normalize API
-  - This demo makes one request for one term. Ideally should bundle the request (upto 300 in one request)
 - Step 3  Get response from Normalize API
   Two options for Step 4
 - Step 4a Write to internal SnowFlake Stage
-  - Need to configure SnowFlake internal Stage at the table level
-  - TBD- steps to configure internal stage
 - Step 4b. Write to external stage in AWS or Azure
 - Step 5. Use Snowpipe to extract from internal or external stage and write to Snowflake staging table
 - Step 6. Create a function or task to extract from staging table and write to Target table
