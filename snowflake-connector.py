@@ -1,6 +1,7 @@
 import pandas as pd
 import json
 import uuid
+import os
 import requests
 from snowflake.connector.pandas_tools import pd_writer
 from sqlalchemy import create_engine
@@ -64,7 +65,11 @@ def write_dataframe():
         df2.to_csv("patientfile.csv", encoding='utf-8')
         engine.raw_connection().cursor().execute("PUT file://patientfile.csv* @%{table}".format(table=config_snowflake_table))
         print("Dataframe pushed to internal stage {table}. Use SQL GET to download the data (ex: GET @%{table} file://xx/xx".format(table=config_snowflake_table))
-
+        # Remove local copy of dataframe after upload
+        try:
+            os.remove("patientfile.csv")
+        except OSError:
+            pass
 
 # CONVERT PANDAS DATATIME FORMAT TO INCLUDE TIMEZONE
 def fix_date_cols(df, tz='UTC'):
