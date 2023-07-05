@@ -102,9 +102,7 @@ def normalize_batch(df, size):
         "client_request_id": str(request_uuid),
         "preferences": {
             "threshold": 0.5,
-            "size": size,
-            "debug": False,
-            "discrepancy_check": False,
+            "size": size,                      
             "match_pref": "input_term"
         },
         "requests": normalize_requests
