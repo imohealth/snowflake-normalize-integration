@@ -14,5 +14,6 @@
         "TABLE": ""
     },
     "write_method": "internal",
-    "batch_size": 20
+    "batch_size": 20,
+    "download_location": ""
 }

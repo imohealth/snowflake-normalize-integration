@@ -46,6 +46,7 @@ This will install the following python packages to your compute cluster:
   3. Get response from Normalize API.
   4. Two options for this step:
       - Write to internal SnowFlake Stage.
+        * Run snowflake-internal-download.py to download internal stage file to local filesystem
       - Or write to external stage in AWS or Azure.
   5. Use Snowpipe to extract from internal or external stage and write to Snowflake staging table.
   6. Create a function or task to extract from staging table and write to Target table.
