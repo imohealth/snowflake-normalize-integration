@@ -8,10 +8,10 @@ from sqlalchemy import create_engine
 
 NORMALIZED_COLUMN = "NORMALIZED_ICD10CM"
 NORMALIZE_REQUEST_ID = "REQUEST_ID"
-BASE_URL = "https://api-dev.imohealth.com/precision/normalize"
-AUDIENCE = "https://api-dev.imohealth.com"
+BASE_URL = "https://api.imohealth.com/precision/normalize"
+AUDIENCE = "https://api.imohealth.com"
 GRANT_TYPE = "client_credentials"
-AUTH0_AUTH_URL = "https://auth-dev.imohealth.com/oauth/token"
+AUTH0_AUTH_URL = "https://auth.imohealth.com/oauth/token"
 
 print("- App started.")
 
@@ -102,7 +102,7 @@ def normalize_batch(df, size):
         "client_request_id": str(request_uuid),
         "preferences": {
             "threshold": 0.5,
-            "size": size,                      
+            "size": size,
             "match_pref": "input_term"
         },
         "requests": normalize_requests
@@ -111,8 +111,7 @@ def normalize_batch(df, size):
     resp = requests.post(
         BASE_URL,
         headers=auth_token_header,
-        json=request,
-        allow_redirects=True,
+        json=request
     )
 
     resp_json = resp.json()
@@ -201,6 +200,7 @@ df2 = fix_date_cols(df2)
 # Normalize the dataset
 normalized_codes = []
 request_ids = []
+
 for i in range(0, df2.shape[0], batch_size):
     df_slice = df[i:i+batch_size]
     normalized_codes_tuple = normalize_batch(df_slice, batch_size)
