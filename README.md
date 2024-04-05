@@ -1,12 +1,12 @@
 ## Overview
-IMO Precision Normalize can integrate with your Snowflake database in one of 2 ways.
+IMO Precision Normalize can integrate with your Snowflake database in one of 2 ways:
 
 1. Snowflake Normalize Connector (External process)
 2. Snowflake Native Application (Runs inside Snowflake)
 
 ## SNOWFLAKE NORMALIZE CONNECTOR
 
-This sample app demonstrates how you can normalize patient problem conditions to industry standard icd10cm codes. 
+This sample app demonstrates how you can normalize patient problem conditions to industry standard ICD10-CM codes. 
 
 # Requirements
 Install dependent packages with the following command:
@@ -61,7 +61,7 @@ This connector demonstrates how to write to internal Stage or write directly to 
 
 ## Native Application
 
-To install IMO Precision Normalize's Native Application, login to the Snowflake console and  Download the App from the Marketplace listing. 
+To install IMO Precision Normalize's Native Application, login to the Snowflake console and download the App from the Marketplace listing. 
 
 ![alt text](image.png)
 
@@ -86,7 +86,7 @@ Follow the pre-requisites and usage guidelines below
 1. Click on Normalize_Connector_Instance (This takes less than a minute to load the streamlit application).
 1. The app will prompt you to give itself access to your sample dataset, the 'patient_terms' table created in pre-requisite step 2
 1. Populate IMO Precision Normalize production key and secret in the form presented.
-1. Set Batch Size to 30 (We support upto a maximum of 300 terms in a single request)
-1. Set the Term Description Column Name to 'condition'
-1. Click 'Start Normalization'
+1. Set Batch Size to 30 (We support upto a maximum of 300 terms in a single request).
+1. Set the Term Description Column Name to 'condition'.
+1. Click 'Start Normalization'.
 This will kick of the process of your dataset normalization. 30 records are being sent to the Normalize API at a time getting the icd10cm code. You can now query your 'patient_terms' table to see the results
