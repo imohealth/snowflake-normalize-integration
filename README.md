@@ -75,18 +75,70 @@ Click the installed Application to launch the App inside Snowflake. The applicat
 
 Follow the pre-requisites and usage guidelines below
 
-# Pre-requisites:
-1. Contact customersupport@imohealth.com for API credentials.
+## Pre-requisites:
+1. Contact IMO to get credentials to start using IMO Precision Normalize API.
+1. Set up network rule and create integration by running the following SQL script on your datawarehouse:
 
+
+```
+SET APP_NAME = 'NORMALIZE_CONNECTOR_INSTANCE';
+
+SET APP_INSTANCE_NAME = $APP_NAME;
+
+SET SECRETS_DB = $APP_NAME || '_SECRETS';
+
+SET SECRETS_SCHEMA = $SECRETS_DB || '.public';
+
+USE ROLE ACCOUNTADMIN;
+
+CREATE OR REPLACE DATABASE IDENTIFIER($SECRETS_DB);
+
+USE DATABASE IDENTIFIER($SECRETS_DB);
+
+CREATE OR REPLACE NETWORK RULE NORMALIZE_API_RULE
+
+MODE = EGRESS
+
+TYPE = HOST_PORT
+
+VALUE_LIST=('api.imohealth.com');
+
+SET CREATE_INTEGRATION = 'CREATE OR REPLACE EXTERNAL ACCESS INTEGRATION NORMALIZE_INTEGRATION
+
+ALLOWED_NETWORK_RULES = (NORMALIZE_API_RULE)
+
+ENABLED = TRUE';
+
+select $CREATE_INTEGRATION;
+
+execute immediate $CREATE_INTEGRATION;
+
+GRANT USAGE ON INTEGRATION NORMALIZE_INTEGRATION TO APPLICATION IDENTIFIER($APP_INSTANCE_NAME);
+
+GRANT USAGE ON DATABASE IDENTIFIER($SECRETS_DB) TO APPLICATION IDENTIFIER($APP_INSTANCE_NAME);
+
+GRANT USAGE ON SCHEMA IDENTIFIER($SECRETS_SCHEMA)  TO APPLICATION IDENTIFIER($APP_INSTANCE_NAME);
+```
 1. Set up a database table named 'patient_terms' with patient conditions having the following columns (RECORD_ID, CONDITION, NORMALIZED_ICD10CM, REQUEST_ID)
-1. Populate the table created in step 2. with the your dataset leaving Normalized_ICD10CM and Request_ID columns empty
+```
+create TABLE TESTSNOWFLAKE.TEST_SCHEMA.PATIENT_TERMS (
+    PATIENT_ID VARCHAR(16777216),	
+    CONDITION VARCHAR(16777216),
+    VISIT_DATE VARCHAR(16777216),
+    NORMALIZED_ICD10CM VARCHAR(16777216),
+    REQUEST_ID VARCHAR(16777216)
+    );
+```
 
-# Usage:
+1. Populate the table created in step 2. with your dataset leaving Normalized_ICD10CM and Request_ID columns empty. Here is a link for an example dataset https://github.com/imohealth/snowflake-normalize-integration/blob/master/patient_conditions.csv
+
+## Usage:
 1. Go to DataProducts -> Apps.
 1. Click on Normalize_Connector_Instance (This takes less than a minute to load the streamlit application).
 1. The app will prompt you to give itself access to your sample dataset, the 'patient_terms' table created in pre-requisite step 2
-1. Populate IMO Precision Normalize production key and secret in the form presented.
-1. Set Batch Size to 30 (We support upto a maximum of 300 terms in a single request).
-1. Set the Term Description Column Name to 'condition'.
-1. Click 'Start Normalization'.
+1. Populate IMO Precision Normalize API production ClientID and Secret in the form presented.
+1. Set Batch Size to 30
+1. Set the Term Description Column Name to 'condition'
+1. Click 'Start Normalization'
+
 This will kick of the process of your dataset normalization. 30 records are being sent to the Normalize API at a time getting the icd10cm code. You can now query your 'patient_terms' table to see the results
