@@ -1,2 +1,8 @@
 patient_id,visit_date,condition
-xxxx-xxx-xx-xx-xxx,8/21/61,Acute bronchitis (disorder)
+1,8/21/61,Acute bronchitis (disorder)
+2,8/21/62,chest pain
+3,8/21/63,finger pain
+4,8/21/64,left knee pain
+5,8/21/65,headache
+6,8/21/66,covid
+7,8/21/67,flu
