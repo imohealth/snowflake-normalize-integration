@@ -76,7 +76,7 @@ Click the installed Application to launch the App inside Snowflake. The applicat
 Follow the pre-requisites and usage guidelines below
 
 ## Pre-requisites:
-1. Contact IMO to get credentials to start using IMO Precision Normalize API.
+1. Contact IMO Health to get credentials to start using IMO Precision Normalize API.
 1. Set up network rule and create integration by running the following SQL script on your datawarehouse:
 
 
